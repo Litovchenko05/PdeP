@@ -122,3 +122,5 @@ haCursado(Alumno, Materia) :-
 ingresante(Alumno) :-
     legajo(Alumno, _),
     not(haCursado(Alumno, _)).
+
+% Es importante dejar de pensar que devuelve algo, y entender que hay que buscar que se relacionen. Si quiero obtener algo a partir de otra cosa, tengo que ver como relacionarlo, medio como una base de datos
