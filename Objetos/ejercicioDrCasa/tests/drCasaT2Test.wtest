@@ -1,0 +1,49 @@
+import Objetos.ejercicioDrCasa.src.enfermedad.*
+import Objetos.ejercicioDrCasa.src.enfermedadAutoinmune.*
+import Objetos.ejercicioDrCasa.src.enfermedadInfecciosa.*
+import Objetos.ejercicioDrCasa.src.medico.*
+import Objetos.ejercicioDrCasa.src.persona.*
+import Objetos.ejercicioDrCasa.src.jefeDeDepartamento.*
+
+describe "Doctor Casa - Temporada 2" {
+    const malaria800 = new EnfermedadInfecciosa(celulasAmenazadas = 800)
+    const malaria500 = new EnfermedadInfecciosa(celulasAmenazadas = 500)
+    const otitis100 = new EnfermedadInfecciosa(celulasAmenazadas = 100)
+    const lupus10000 = new EnfermedadAutoinmune(celulasAmenazadas = 10000)
+
+    const logan = new Persona(temperatura = 36, celulas = 3000000, enfermedades = #{malaria500, otitis100, lupus10000})
+    const cameron = new Medico(dosis = 10, celulas = 3000000, enfermedades = #{malaria500})
+    const house = new JefeDeDepartamento(subordinados = #{cameron}, dosis = 20, celulas = 3000000)
+
+  test "Malaria de 800 celulas se atenua en 100 celulas y queda en 700" {
+    malaria800.atenuarse(100)
+    assert.equals(700, malaria800.celulasAmenazadas())
+  }
+
+  test "Lupus de 10000 celulas se atenua en 500 celulas y queda en 9500" {
+    lupus10000.atenuarse(500)
+    assert.equals(9500, lupus10000.celulasAmenazadas())
+  }
+
+  test "Cameron atiende a Logan" {
+    cameron.atender(logan)
+    assert.equals(350, malaria500.celulasAmenazadas())
+    assert.equals(9850, lupus10000.celulasAmenazadas())
+    assert.equals(2, logan.cantidadDeEnfermedades())
+  }
+
+  test "House atiende a Cameron" {
+    house.atender(cameron)
+    assert.equals(350, malaria500.celulasAmenazadas())
+  }
+
+  test "Cameron contrae malaria800" {
+    cameron.contraer(malaria800)
+    assert.equals(650, malaria800.celulasAmenazadas())
+  }
+
+  test "House contrae malaria 500" {
+    house.contraer(malaria500)
+    assert.equals(350, malaria500.celulasAmenazadas())
+  }
+}

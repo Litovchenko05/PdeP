@@ -1,0 +1,39 @@
+import Objetos.ejercicioDrCasa.src.enfermedad.*
+import Objetos.ejercicioDrCasa.src.enfermedadAutoinmune.*
+import Objetos.ejercicioDrCasa.src.enfermedadInfecciosa.*
+import Objetos.ejercicioDrCasa.src.medico.*
+import Objetos.ejercicioDrCasa.src.persona.*
+import Objetos.ejercicioDrCasa.src.jefeDeDepartamento.*
+
+
+describe "Doctor Casa - Temporada 1" {
+    const malaria800 = new EnfermedadInfecciosa(celulasAmenazadas = 800)
+    const malaria500 = new EnfermedadInfecciosa(celulasAmenazadas = 500)
+    const otitis100 = new EnfermedadInfecciosa(celulasAmenazadas = 100)
+    const lupus10000 = new EnfermedadAutoinmune(celulasAmenazadas = 10000)
+
+    const frank = new Persona(temperatura = 36, celulas = 3500000, enfermedades = #{})
+    const logan = new Persona(temperatura = 36, celulas = 3000000, enfermedades = #{malaria500, otitis100, lupus10000})
+  test "Frank contrae malaria de 800" {
+    frank.contraer(malaria800)
+    assert.equals(1, frank.cantidadDeEnfermedades())
+  }
+
+  test "La malaria500 de Logan se reproduce" {
+    malaria500.reproducirse()
+    assert.equals(1000, malaria500.celulasAmenazadas())
+  }
+  test "Logan vive un dia" {
+    logan.vivirUnDia()
+    assert.equals(0, logan.cantidadCelulasAmenazadasPorEnfermedadesAgresivas())
+    assert.equals(lupus10000, logan.enfermedadQueMasCelulasAfecta())
+    assert.notThat(logan.estaEnComa())
+  }
+
+  test "Logan vive 31 dias" {
+    logan.vivirDias(31)
+    assert.equals(10000, logan.cantidadCelulasAmenazadasPorEnfermedadesAgresivas())
+    assert.equals(lupus10000, logan.enfermedadQueMasCelulasAfecta())
+    assert.that(logan.estaEnComa())
+  }
+}
