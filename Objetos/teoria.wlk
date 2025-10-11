@@ -87,3 +87,10 @@ object ciro {
 // los objetos son inmutables, lo unico que puede cambiar es su estado interno
 // Objeto: Representacion computacional de un ente que exhibe comportamiento
 // Quiero que un objeto entienda tal mensaje, entonces creo un metodo con el mismo nombre
+
+/* Preguntas para hacerse al resolver un ejercicio:
+    1) De quién es la responsabilidad de ...?
+    2) Quién tiene la información minima e indispensable para ...?
+*/
+
+// si no utilizamos un parametro, lo llamamos _nombreDelParametro
