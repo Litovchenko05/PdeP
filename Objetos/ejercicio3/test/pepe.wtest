@@ -1,0 +1,58 @@
+import Objetos.ejercicio3.src.empleado.*
+import Objetos.ejercicio3.src.categoria.*
+import Objetos.ejercicio3.src.bonoPresentismo.*
+import Objetos.ejercicio3.src.bonoResultados.*
+
+describe "Tests del sueldo de Pepe" {
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo nulo y bono por resultados nulo " {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoNulo)
+        pepe.bonoResultados(bonoResultadosNulo)
+        assert.equals(1500, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo nulo y bono por resultados fijo" {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoNulo)
+        pepe.bonoResultados(bonoResultadosFijo)
+        assert.equals(1580, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo nulo y bono por resultados segun porcentaje del neto" {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoNulo)
+        pepe.bonoResultados(bonoResultadosSobreNeto)
+        assert.equals(1650, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo segun faltas y bono por resultados nulo" {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoPorFalta)
+        pepe.faltas(0)
+        pepe.bonoResultados(bonoResultadosNulo)
+        assert.equals(1600, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo segun faltas y bono por resultados fijo" {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoPorFalta)
+        pepe.faltas(0)
+        pepe.bonoResultados(bonoResultadosFijo)
+        assert.equals(1680, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es cadete, tiene bono por presentismo segun faltas y bono por resultados segun porcentaje del neto" {
+        pepe.categoria(cadete)
+        pepe.bonoPresentismo(bonoPresentismoPorFalta)
+        pepe.faltas(0)
+        pepe.bonoResultados(bonoResultadosSobreNeto)
+        assert.equals(1750, pepe.sueldo()) 
+    }
+
+    test "Pepe me dice bien su sueldo cuando: es gerente, tiene bono por presentismo nulo y bono por resultados nulo" {
+        pepe.categoria(gerente)
+        pepe.bonoPresentismo(bonoPresentismoNulo)
+        pepe.bonoResultados(bonoResultadosNulo)
+        assert.equals(1000, pepe.sueldo()) 
+    }
+}
