@@ -5,8 +5,12 @@ class Persona {
     var temperatura = 36
     var celulas
     const enfermedades = #{}
+    const grupo
+    const factorSanguineo
 
-    method celulas() = celulas 
+    method celulas() = celulas
+
+    method grupo() = grupo  
 
     method contraer(enfermedad) {
         enfermedades.add(enfermedad)
@@ -41,8 +45,12 @@ class Persona {
         return enfermedades.max({enfermedad => enfermedad.celulasAmenazadas()})
     }
 
-    method destruirCelulas(cantidad) {
+    method disminuirCelulas(cantidad) {
         celulas = (celulas - cantidad).max(0)
+    }
+
+    method aumentarCelulas(cantidad) {
+        celulas += cantidad
     }
 
     method estaEnComa() {
@@ -61,5 +69,20 @@ class Persona {
     }
 
     method cantidadDeEnfermedades() = enfermedades.size()
+
+    method donarSangre(receptor, cantidadDeCelulas) {
+        if(self.puedeDonar(receptor)) {
+            self.disminuirCelulas(cantidadDeCelulas)
+            receptor.aumentarCelulas(cantidadDeCelulas)
+        } else {
+            throw new Exception(message = "No puede donar!")
+        }
+        
+    }
+
+    method puedeDonar(receptor, cantidadDeCelulas) = self.esCompatible(receptor) and self.cantidadDeCelulasAceptadas()
+
+    method esCompatible(receptor) = self.esGrupoCompatibleCon(receptor) and self.esFactorCompatibleCon(receptor)
 }
 
+// grupo.puedeDonarleA(receptor.grupo())

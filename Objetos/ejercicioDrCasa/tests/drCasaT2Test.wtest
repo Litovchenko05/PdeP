@@ -11,9 +11,9 @@ describe "Doctor Casa - Temporada 2" {
     const otitis100 = new EnfermedadInfecciosa(celulasAmenazadas = 100)
     const lupus10000 = new EnfermedadAutoinmune(celulasAmenazadas = 10000)
 
-    const logan = new Persona(temperatura = 36, celulas = 3000000, enfermedades = #{malaria500, otitis100, lupus10000})
-    const cameron = new Medico(dosis = 10, celulas = 3000000, enfermedades = #{malaria500})
-    const house = new JefeDeDepartamento(subordinados = #{cameron}, dosis = 20, celulas = 3000000)
+    const logan = new Persona(grupo = O, factorSanguineo = positivo, temperatura = 36, celulas = 3000000, enfermedades = #{malaria500, otitis100, lupus10000})
+    const cameron = new Medico(grupo = O, factorSanguineo = positivo, dosis = 10, celulas = 3000000, enfermedades = #{malaria500})
+    const house = new JefeDeDepartamento(grupo = O, factorSanguineo = positivo, subordinados = #{cameron}, dosis = 20, celulas = 3000000)
 
   test "Malaria de 800 celulas se atenua en 100 celulas y queda en 700" {
     malaria800.atenuarse(100)
