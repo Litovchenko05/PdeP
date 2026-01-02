@@ -80,7 +80,7 @@ arroba = '@'
 -- Como interpretamos la "flechita gorda"?   Restriciones => Tipos
 
 {-
-    Orden de Presendencia
+    Orden de Precedencia
         1. Parentesis
         2. Aplicacion prefija (Funcion parametro parametro)
         3. Composición
